@@ -1,25 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
-
-const Title = styled.div`
-  font-size: 20px;
-  margin-bottom: 50px;
-`;
+import { Title } from './Components';
 
 const HintText = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 12px;
   font-style: italic;
-`;
-
-const AppWrapper = styled.div`
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
 `;
 
 const LoginWrapper = styled.div`
@@ -27,6 +18,10 @@ const LoginWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  background-image: url('https://media1.tenor.com/images/6bf658d3c1df80990a0817b417b78155/tenor.gif?itemid=10503435');
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const StyledForm = styled.form`
@@ -35,6 +30,11 @@ const StyledForm = styled.form`
 
 const StyledFormGroup = styled(FormGroup)`
   text-align: left;
+`;
+
+const StyledFormLabel = styled(FormLabel)`
+  font-weight: bold;
+  font-size: 12px;
 `;
 
 export default class Login extends React.Component {
@@ -63,7 +63,6 @@ export default class Login extends React.Component {
 
   handleOnSubmit = () => {
     const { username, password } = this.state;
-    console.log(username, password);
     if (username === 'abc' && password === 'abc') {
       this.props.history.push('/home');
     } else {
@@ -74,34 +73,34 @@ export default class Login extends React.Component {
   render() {
     const { username, password, isValidForm } = this.state;
     return (
-      <AppWrapper>
-        <LoginWrapper>
-          <Title>Hack the North 2020</Title>
-          <StyledForm onSubmit={this.handleOnSubmit}>
-            <StyledFormGroup controlId="email" bsSize="large">
-              <FormLabel>Username</FormLabel>
-              <FormControl
-                autoFocus
-                type="username"
-                value={username}
-                onChange={e => this.handleUsernameChange(e.target.value)}
-              />
-            </StyledFormGroup>
-            <StyledFormGroup controlId="password" bsSize="large">
-              <FormLabel>Password</FormLabel>
-              <FormControl
-                type="password"
-                value={password}
-                onChange={e => this.handlePasswordChange(e.target.value)}
-              />
-            </StyledFormGroup>
-            <Button block bsSize="large" disabled={!isValidForm} type="submit">
-              Login
-            </Button>
-          </StyledForm>
-          <HintText>Hint: use "abc" as the password and username</HintText>
-        </LoginWrapper>
-      </AppWrapper>
+      <LoginWrapper>
+        <Title>Hack the North 2020</Title>
+        <StyledForm onSubmit={this.handleOnSubmit}>
+          <StyledFormGroup controlId="email" bsSize="large">
+            <StyledFormLabel>Username</StyledFormLabel>
+            <FormControl
+              autoFocus
+              type="username"
+              value={username}
+              placeholder="username"
+              onChange={e => this.handleUsernameChange(e.target.value)}
+            />
+          </StyledFormGroup>
+          <StyledFormGroup controlId="password" bsSize="large">
+            <StyledFormLabel>Password</StyledFormLabel>
+            <FormControl
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={e => this.handlePasswordChange(e.target.value)}
+            />
+          </StyledFormGroup>
+          <Button block bsSize="large" disabled={!isValidForm} type="submit">
+            Login
+          </Button>
+        </StyledForm>
+        <HintText>Hint: use "abc" as the password and username</HintText>
+      </LoginWrapper>
     );
   }
 }

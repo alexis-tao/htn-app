@@ -2,11 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-
-const Title = styled.div`
-  font-size: 20px;
-  margin-bottom: 20px;
-`;
+import { Title } from './Components';
 
 const Text = styled.div`
   margin-bottom: 10px;
@@ -66,9 +62,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     axios
-      .get(
-        'https://hackthenorth.netlify.com/api/fe-challenge-attendee?id=190258281'
-      )
+      .get('https://hackthenorth.netlify.com/api/fe-challenge-attendee')
       .then(res => res.data)
       .then(data =>
         this.setState({
@@ -89,6 +83,7 @@ export default class Home extends React.Component {
   handleAttendWorkshops = () => {
     // we could open a new modal that allows user to pick available workshops
     // send post request to update db
+    console.log('handle attend workshops');
   };
 
   getProfile = () => {

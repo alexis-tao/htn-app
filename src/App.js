@@ -6,7 +6,6 @@ import Home from './Home';
 function App() {
   return (
     <Router>
-      {/* <Route path="/" exact component={Landing} /> */}
       <Route path="/" exact component={withRouter(Login)} />
       <Route path="/home" exact component={withRouter(Home)} />
     </Router>
