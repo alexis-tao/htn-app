@@ -80,6 +80,11 @@ const BackgroundVideo = styled.div`
   bottom: 0;
 `;
 
+const StyledButton = styled(Button)`
+  margin-top: 50px;
+  margin-bottom: 10px;
+`;
+
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -151,9 +156,9 @@ export default class Login extends React.Component {
                 Please enter a valid password
               </ErrorText>
             </StyledFormGroup>
-            <Button block bsSize="large" type="submit">
+            <StyledButton block bsSize="large" type="submit">
               Login
-            </Button>
+            </StyledButton>
           </StyledForm>
           <HintText>Hint: use "abc" as the password and username</HintText>
         </LoginWrapper>
