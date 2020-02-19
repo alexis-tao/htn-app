@@ -30,6 +30,7 @@ const AppWrapper = styled.div`
 const ProfilePicWrapper = styled.div`
   width: 100%;
   margin-right: 20px;
+  margin-bottom: 20px;
 `;
 
 const ProfilePic = styled.img`
@@ -38,6 +39,9 @@ const ProfilePic = styled.img`
 
 const ProfileWrapper = styled.div`
   display: flex;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const ProfileInfo = styled.div`

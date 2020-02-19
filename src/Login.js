@@ -22,10 +22,17 @@ const LoginWrapper = styled.div`
   background-image: url('https://media1.tenor.com/images/6bf658d3c1df80990a0817b417b78155/tenor.gif?itemid=10503435');
   background-size: cover;
   background-repeat: no-repeat;
+  padding: 20px;
+  @media screen and (max-width: 600px) {
+    background-image: none;
+  }
 `;
 
 const StyledForm = styled.form`
   width: 30%;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const StyledFormGroup = styled(FormGroup)`
