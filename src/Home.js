@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import { Title } from './Components';
+
+const Title = styled.div`
+  font-size: 20px;
+  margin-bottom: 20px;
+`;
 
 const Text = styled.div`
   margin-bottom: 10px;
