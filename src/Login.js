@@ -19,9 +19,9 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-image: url('https://media1.tenor.com/images/6bf658d3c1df80990a0817b417b78155/tenor.gif?itemid=10503435');
+  /* background-image: url('https://media1.tenor.com/images/6bf658d3c1df80990a0817b417b78155/tenor.gif?itemid=10503435');
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
   padding: 20px;
   @media screen and (max-width: 600px) {
     background-image: none;
@@ -44,45 +44,56 @@ const StyledFormLabel = styled(FormLabel)`
   font-size: 12px;
 `;
 
+const ErrorText = styled.div`
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  padding: 5px;
+  display: ${props => (props.isShow ? 'block' : 'none')};
+`;
+
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
-      isValidForm: false
+      isValidated: false
     };
   }
 
   handleUsernameChange = _value => {
     this.setState({
       username: _value,
-      isValidForm: _value !== '' && this.state.password !== ''
+      isValidated: false
     });
   };
 
   handlePasswordChange = _value => {
     this.setState({
       password: _value,
-      isValidForm: this.state.username !== '' && _value !== ''
+      isValidated: false
     });
   };
 
-  handleOnSubmit = () => {
+  handleOnSubmit = e => {
     const { username, password } = this.state;
     if (username === 'abc' && password === 'abc') {
       this.props.history.push('/home');
     } else {
-      // invalid login
+      e.preventDefault();
+      e.stopPropagation();
     }
+    this.setState({ isValidated: true });
   };
 
   render() {
-    const { username, password, isValidForm } = this.state;
+    const { username, password, isValidated } = this.state;
     return (
       <LoginWrapper>
         <Title>Hack the North 2020</Title>
-        <StyledForm onSubmit={this.handleOnSubmit}>
+        <StyledForm onSubmit={this.handleOnSubmit} validated>
           <StyledFormGroup controlId="email" bsSize="large">
             <StyledFormLabel>Username</StyledFormLabel>
             <FormControl
@@ -90,8 +101,12 @@ export default class Login extends React.Component {
               type="username"
               value={username}
               placeholder="username"
+              required
               onChange={e => this.handleUsernameChange(e.target.value)}
             />
+            <ErrorText isShow={isValidated}>
+              Please enter a valid username
+            </ErrorText>
           </StyledFormGroup>
           <StyledFormGroup controlId="password" bsSize="large">
             <StyledFormLabel>Password</StyledFormLabel>
@@ -99,10 +114,14 @@ export default class Login extends React.Component {
               type="password"
               placeholder="password"
               value={password}
+              required
               onChange={e => this.handlePasswordChange(e.target.value)}
             />
+            <ErrorText isShow={isValidated}>
+              Please enter a valid password
+            </ErrorText>
           </StyledFormGroup>
-          <Button block bsSize="large" disabled={!isValidForm} type="submit">
+          <Button block bsSize="large" type="submit">
             Login
           </Button>
         </StyledForm>
