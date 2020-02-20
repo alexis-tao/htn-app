@@ -112,6 +112,7 @@ export default class Login extends React.Component {
   handleOnSubmit = e => {
     const { username, password } = this.state;
     if (username === 'abc' && password === 'abc') {
+      console.log(this.props);
       this.props.history.push('/home');
     } else {
       e.preventDefault();
